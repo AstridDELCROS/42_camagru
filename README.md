@@ -95,7 +95,10 @@ If you lack inspiration, here are some leads:
 - Offer the possibility to a user to share his images on social networks.
 - Render an animated GIF.
 
-=======================================================================================================
+
+===================
+===================
+
 
 ##### launch webcam
 - ts-node src/index.ts
