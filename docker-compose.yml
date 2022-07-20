@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=database
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=host
+      - HTTP_LISTENING_PORT=5000
+      # - SYNCHRONIZE_DB=true
+      # - SESSION_LIFETIME=15m
+    volumes:
+      - ./:/usr/app
+    depends_on:
+      - database
+    ports:
+      - 3000:5000
+
+  database:
+    image: postgres:14.4-alpine
+    container_name: camagru-database
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=database
+    volumes:
+      - ./src/database/camagru.sql:/docker-entrypoint-initdb.d/camagru.sql

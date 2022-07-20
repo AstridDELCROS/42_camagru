@@ -17,7 +17,7 @@ const dataMapper = {
             if (error) {
                 console.log(error);
             }
-            let data: any = [];
+            let data = [];
             if (result) {
                 data = result.rows;
             }
