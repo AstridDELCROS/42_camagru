@@ -6,12 +6,10 @@ services:
       dockerfile: Dockerfile
       context: .
     environment:
-      - PGUSER=user
-      - PGPASSWORD=password
-      - PGDATABASE=database
-      - PGPORT=5432
-      - PGHOST=host
-      - HTTP_LISTENING_PORT=5000
+      PGHOST: host
+      SYNCHRONIZE_DATABASE: true
+    env_file:
+      - .env
     volumes:
       - ./:/usr/app
     depends_on:
@@ -22,9 +20,7 @@ services:
   database:
     image: postgres:14.4-alpine
     container_name: camagru-database
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=database
+    env_file:
+      - .env
     volumes:
       - ./src/database/camagru.sql:/docker-entrypoint-initdb.d/camagru.sql
